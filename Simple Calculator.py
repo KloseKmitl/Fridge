@@ -32,8 +32,8 @@ class MainWindow(qtw.QWidget):
         btn_divd = qtw.QPushButton('/', clicked = lambda:self.func_press('/'))
         btn_result = qtw.QPushButton('=', clicked = self.func_result)
         btn_clearall = qtw.QPushButton('C', clicked = self.clear_calc)
-        btn_clear = qtw.QPushButton('CE')
-        btn_float = qtw.QPushButton('.')
+        btn_clear = qtw.QPushButton('CE', clicked = self.clear_result)
+        btn_float = qtw.QPushButton('.', clicked = lambda:self.num_press('.'))
 
         #Adding buttons to layout
         container.layout().addWidget(self.result_field,0,0,1,4)
@@ -83,6 +83,11 @@ class MainWindow(qtw.QWidget):
         self.result_field.clear()
         self.temp_nums = []
         self.fin_nums = []
+
+    def clear_result(self):
+        fin_string = ''.join(self.fin_nums) + ''.join(self.temp_nums)
+        result_string = eval(fin_string)
+        self.result_field.setText(fin_string)
 
 app = qtw.QApplication([])
 mw = MainWindow()
