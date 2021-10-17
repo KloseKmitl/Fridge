@@ -6,7 +6,8 @@ class MainWindow(qtw.QWidget):
         self.setWindowTitle('Simple Calculator')
         self.setLayout(qtw.QVBoxLayout())
         self.keypad()
-
+        self.temp_nums = []
+        self.fin_nums = []
         self.show()
 
     def keypad(self):
@@ -55,7 +56,8 @@ class MainWindow(qtw.QWidget):
         container.layout().addWidget(btn_clear,5,0,1,2)
         container.layout().addWidget(btn_clearall,5,2,1,2)
         self.layout().addWidget(container)
-        
+
 app = qtw.QApplication([])
 mw = MainWindow()
+app.setStyle(qtw.QStyleFactory.create('Fusion'))
 app.exec_()
