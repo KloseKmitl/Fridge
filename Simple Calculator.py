@@ -72,7 +72,6 @@ class MainWindow(qtw.QWidget):
         container.layout().addWidget(btn_result,4,0,1,1)
         container.layout().addWidget(btn_0,4,1,1,1)
         container.layout().addWidget(btn_float,4,2,1,1)
-        
         container.layout().addWidget(btn_plus,4,3,1,1)
         container.layout().addWidget(btn_clear,5,0,1,2)
         container.layout().addWidget(btn_clearall,5,2,1,2)
@@ -96,9 +95,7 @@ class MainWindow(qtw.QWidget):
     def func_result(self):
         fin_string = ''.join(self.fin_nums) + ''.join(self.temp_nums)
         result_string = eval(fin_string)
-        fin_string += '='
-        fin_string += str(result_string)
-        self.result_field.setText(fin_string)
+        self.result_field.setText(str(result_string))
 
     def clear_calc(self):
         self.result_field.clear()
