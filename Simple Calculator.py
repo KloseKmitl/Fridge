@@ -14,10 +14,12 @@ class MainWindow(qtw.QWidget):
     def keypad(self):
         container = qtw.QWidget()
         container.setLayout(qtw.QGridLayout())
+        container.setStyleSheet("background-color: black;")
 
         #Buttons
         self.result_field = qtw.QLineEdit()
         self.result_field.setAlignment(QtCore.Qt.AlignRight)
+        self.result_field.setStyleSheet("color: white;")
         btn_9 = qtw.QPushButton('9', clicked = lambda:self.num_press('9'))
         btn_8 = qtw.QPushButton('8', clicked = lambda:self.num_press('8'))
         btn_7 = qtw.QPushButton('7', clicked = lambda:self.num_press('7'))
