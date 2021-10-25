@@ -1,4 +1,5 @@
 import PyQt5.QtWidgets as qtw
+from PyQt5 import QtCore
 
 class MainWindow(qtw.QWidget):
     def __init__(self):
@@ -13,9 +14,12 @@ class MainWindow(qtw.QWidget):
     def keypad(self):
         container = qtw.QWidget()
         container.setLayout(qtw.QGridLayout())
+        container.setStyleSheet("background-color: black;")
 
         #Buttons
         self.result_field = qtw.QLineEdit()
+        self.result_field.setAlignment(QtCore.Qt.AlignRight)
+        self.result_field.setStyleSheet("color: white;")
         btn_9 = qtw.QPushButton('9', clicked = lambda:self.num_press('9'))
         btn_8 = qtw.QPushButton('8', clicked = lambda:self.num_press('8'))
         btn_7 = qtw.QPushButton('7', clicked = lambda:self.num_press('7'))
@@ -34,6 +38,24 @@ class MainWindow(qtw.QWidget):
         btn_clearall = qtw.QPushButton('C', clicked = self.clear_calc)
         btn_clear = qtw.QPushButton('CE', clicked = self.clear_result)
         btn_float = qtw.QPushButton('.', clicked = lambda:self.num_press('.'))
+        btn_9.setStyleSheet("background-color: yellow;")
+        btn_8.setStyleSheet("background-color: yellow;")
+        btn_7.setStyleSheet("background-color: yellow;")
+        btn_6.setStyleSheet("background-color: yellow;")
+        btn_5.setStyleSheet("background-color: yellow;")
+        btn_4.setStyleSheet("background-color: yellow;")
+        btn_3.setStyleSheet("background-color: yellow;")
+        btn_2.setStyleSheet("background-color: yellow;")
+        btn_1.setStyleSheet("background-color: yellow;")
+        btn_0.setStyleSheet("background-color: yellow;")
+        btn_result.setStyleSheet("background-color: red;")
+        btn_float.setStyleSheet("background-color: green;")
+        btn_clear.setStyleSheet("background-color: orange;")
+        btn_clearall.setStyleSheet("background-color: blue;")
+        btn_plus.setStyleSheet("background-color: #ffb2d4;")
+        btn_mins.setStyleSheet("background-color: #ffb2d4;")
+        btn_mult.setStyleSheet("background-color: #ffb2d4;")
+        btn_divd.setStyleSheet("background-color: #ffb2d4;")
 
         #Adding buttons to layout
         container.layout().addWidget(self.result_field,0,0,1,4)
