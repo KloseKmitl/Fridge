@@ -14,12 +14,14 @@ class MainWindow(qtw.QWidget):
     def keypad(self):
         container = qtw.QWidget()
         container.setLayout(qtw.QGridLayout())
-        container.setStyleSheet("background-color: black;")
 
         #Buttons
-        self.result_field = qtw.QLineEdit()
-        self.result_field.setAlignment(QtCore.Qt.AlignRight)
-        self.result_field.setStyleSheet("color: white;")
+        self.result_field_1 = qtw.QLineEdit()
+        self.result_field_1.setAlignment(QtCore.Qt.AlignRight)
+        self.result_field_1.setStyleSheet("color: black;")
+        self.result_field_2 = qtw.QLineEdit()
+        self.result_field_2.setAlignment(QtCore.Qt.AlignRight)
+        self.result_field_2.setStyleSheet("color: black;")
         btn_9 = qtw.QPushButton('9', clicked = lambda:self.num_press('9'))
         btn_8 = qtw.QPushButton('8', clicked = lambda:self.num_press('8'))
         btn_7 = qtw.QPushButton('7', clicked = lambda:self.num_press('7'))
@@ -58,58 +60,58 @@ class MainWindow(qtw.QWidget):
         btn_divd.setStyleSheet("background-color: #ffb2d4;")
 
         #Adding buttons to layout
-        container.layout().addWidget(self.result_field,0,0,1,4)
-        container.layout().addWidget(btn_7,1,0,1,1)
-        container.layout().addWidget(btn_8,1,1,1,1)
-        container.layout().addWidget(btn_9,1,2,1,1)
-        container.layout().addWidget(btn_divd,1,3,1,1)
-        container.layout().addWidget(btn_4,2,0,1,1)
-        container.layout().addWidget(btn_5,2,1,1,1)
-        container.layout().addWidget(btn_6,2,2,1,1)
-        container.layout().addWidget(btn_mult,2,3,1,1)
-        container.layout().addWidget(btn_1,3,0,1,1)
-        container.layout().addWidget(btn_2,3,1,1,1)
-        container.layout().addWidget(btn_3,3,2,1,1)
-        container.layout().addWidget(btn_mins,3,3,1,1)
-        container.layout().addWidget(btn_result,4,0,1,1)
-        container.layout().addWidget(btn_0,4,1,1,1)
-        container.layout().addWidget(btn_float,4,2,1,1)
-        container.layout().addWidget(btn_plus,4,3,1,1)
-        container.layout().addWidget(btn_clear,5,0,1,2)
-        container.layout().addWidget(btn_clearall,5,2,1,2)
+        container.layout().addWidget(self.result_field_2,0,0,1,4)
+        container.layout().addWidget(self.result_field_1,1,0,1,4)
+        container.layout().addWidget(btn_7,2,0,1,1)
+        container.layout().addWidget(btn_8,2,1,1,1)
+        container.layout().addWidget(btn_9,2,2,1,1)
+        container.layout().addWidget(btn_divd,2,3,1,1)
+        container.layout().addWidget(btn_4,3,0,1,1)
+        container.layout().addWidget(btn_5,3,1,1,1)
+        container.layout().addWidget(btn_6,3,2,1,1)
+        container.layout().addWidget(btn_mult,3,3,1,1)
+        container.layout().addWidget(btn_1,4,0,1,1)
+        container.layout().addWidget(btn_2,4,1,1,1)
+        container.layout().addWidget(btn_3,4,2,1,1)
+        container.layout().addWidget(btn_mins,4,3,1,1)
+        container.layout().addWidget(btn_result,5,0,1,1)
+        container.layout().addWidget(btn_0,5,1,1,1)
+        container.layout().addWidget(btn_float,5,2,1,1)
+        container.layout().addWidget(btn_plus,5,3,1,1)
+        container.layout().addWidget(btn_clear,6,0,1,2)
+        container.layout().addWidget(btn_clearall,6,2,1,2)
         self.layout().addWidget(container)
 
     def num_press(self, key_number):
         self.temp_nums.append(key_number)
         temp_string = ''.join(self.temp_nums)
-        if self.fin_nums:
-            self.result_field.setText(''.join(self.fin_nums) + temp_string)
-        else:
-            self.result_field.setText(temp_string)
+        self.result_field_1.setText(temp_string)
 
     def func_press(self, operator):
         temp_string = ''.join(self.temp_nums)
         self.fin_nums.append(temp_string)
         self.fin_nums.append(operator)
+        self.result_field_2.setText(''.join(self.fin_nums))
         self.temp_nums = []
-        self.result_field.setText(''.join(self.fin_nums))
+        self.result_field_1.clear()
 
     def func_result(self):
         fin_string = ''.join(self.fin_nums) + ''.join(self.temp_nums)
+        self.result_field_2.setText(fin_string)
         result_string = eval(fin_string)
-        fin_string += '='
-        fin_string += str(result_string)
-        self.result_field.setText(fin_string)
+        self.result_field_1.setText(str(result_string))
 
     def clear_calc(self):
-        self.result_field.clear()
+        self.result_field_1.clear()
+        self.result_field_2.clear()
         self.temp_nums = []
         self.fin_nums = []
 
     def clear_result(self):
-        fin_string = ''.join(self.fin_nums) + ''.join(self.temp_nums)
-        result_string = eval(fin_string)
-        self.result_field.setText(fin_string)
+        self.result_field_2.setText(''.join(self.fin_nums))
+        self.result_field_1.clear()
+        self.temp_nums = []
+        
 
 app = qtw.QApplication([])
 mw = MainWindow()
