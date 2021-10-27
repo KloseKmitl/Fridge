@@ -111,7 +111,6 @@ class MainWindow(qtw.QWidget):
         self.result_field_2.setText(''.join(self.fin_nums))
         self.result_field_1.clear()
         self.temp_nums = []
-        
 
 app = qtw.QApplication([])
 mw = MainWindow()
