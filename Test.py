@@ -10,7 +10,7 @@ class MainWindow(qtw.QWidget):
         self.temp_nums = []
         self.fin_nums = []
         self.show()
-
+        
     def keypad(self):
         container = qtw.QWidget()
         container.setLayout(qtw.QGridLayout())
@@ -19,9 +19,10 @@ class MainWindow(qtw.QWidget):
         self.outputLabel_1 = qtw.QLabel()
         self.outputLabel_1.setAlignment(QtCore.Qt.AlignRight)
         self.outputLabel_1.setStyleSheet("color: black;")
+        self.outputLabel_1.setText('0')
         self.outputLabel_2 = qtw.QLabel()
         self.outputLabel_2.setAlignment(QtCore.Qt.AlignRight)
-        self.outputLabel_2.setStyleSheet("color: black;")
+        self.outputLabel_2.setStyleSheet("color: grey;")
         btn_9 = qtw.QPushButton('9', clicked = lambda:self.num_press('9'))
         btn_8 = qtw.QPushButton('8', clicked = lambda:self.num_press('8'))
         btn_7 = qtw.QPushButton('7', clicked = lambda:self.num_press('7'))
@@ -38,9 +39,26 @@ class MainWindow(qtw.QWidget):
         btn_divd = qtw.QPushButton('/', clicked = lambda:self.func_press('/'))
         btn_result = qtw.QPushButton('=', clicked = self.func_result)
         btn_clearall = qtw.QPushButton('C', clicked = self.clear_calc)
-        btn_clear = qtw.QPushButton('CE', clicked = self.clear_result)
         btn_float = qtw.QPushButton('.', clicked = lambda:self.num_press('.'))
         btn_del = qtw.QPushButton('DEL', clicked = self.delete)
+        btn_9.setStyleSheet("background-color: #007060;")
+        btn_8.setStyleSheet("background-color: #007060;")
+        btn_7.setStyleSheet("background-color: #007060;")
+        btn_6.setStyleSheet("background-color: #007060;")
+        btn_5.setStyleSheet("background-color: #007060;")
+        btn_4.setStyleSheet("background-color: #007060;")
+        btn_3.setStyleSheet("background-color: #007060;")
+        btn_2.setStyleSheet("background-color: #007060;")
+        btn_1.setStyleSheet("background-color: #007060;")
+        btn_0.setStyleSheet("background-color: #007060;")
+        btn_result.setStyleSheet("background-color: #50C878;")
+        btn_float.setStyleSheet("background-color: #50C878;")
+        btn_clearall.setStyleSheet("background-color: #F50407;")
+        btn_plus.setStyleSheet("background-color: #50C878;")
+        btn_mins.setStyleSheet("background-color: #50C878;")
+        btn_mult.setStyleSheet("background-color: #50C878;")
+        btn_divd.setStyleSheet("background-color: #50C878;")
+        btn_del.setStyleSheet("background-color: #F50407;")
 
         #Adding buttons to layout
         container.layout().addWidget(self.outputLabel_2,0,0,1,4)
@@ -62,8 +80,7 @@ class MainWindow(qtw.QWidget):
         container.layout().addWidget(btn_float,5,2,1,1)
         container.layout().addWidget(btn_plus,5,3,1,1)
         container.layout().addWidget(btn_clearall,6,0,1,2)
-        container.layout().addWidget(btn_clear,6,2,1,1)
-        container.layout().addWidget(btn_del,6,3,1,1)
+        container.layout().addWidget(btn_del,6,2,1,2)
         self.layout().addWidget(container)
 
     def num_press(self, key_number):
@@ -84,17 +101,14 @@ class MainWindow(qtw.QWidget):
         self.outputLabel_2.setText(fin_string)
         result_string = eval(fin_string)
         self.outputLabel_1.setText(str(result_string))
+        self.fin_nums = [str(result_string)]
+        self.temp_nums = []
 
     def clear_calc(self):
-        self.outputLabel_1.clear()
+        self.outputLabel_1.setText('0')
         self.outputLabel_2.clear()
         self.temp_nums = []
         self.fin_nums = []
-
-    def clear_result(self):
-        self.outputLabel_2.setText(''.join(self.fin_nums))
-        self.outputLabel_1.clear()
-        self.temp_nums = []
 
     def delete(self):
         if self.temp_nums == []:
@@ -102,8 +116,9 @@ class MainWindow(qtw.QWidget):
         else:
             self.temp_nums.pop()
             self.outputLabel_1.setText(''.join(self.temp_nums))
+            if self.temp_nums == []:
+                self.outputLabel_1.setText('0')
         
-
 app = qtw.QApplication([])
 mw = MainWindow()
 app.setStyle(qtw.QStyleFactory.create('Fusion'))
