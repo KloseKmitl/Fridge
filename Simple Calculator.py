@@ -100,6 +100,8 @@ class MainWindow(qtw.QWidget):
         fin_string = ''.join(self.fin_nums) + ''.join(self.temp_nums)
         self.outputLabel_2.setText(fin_string)
         result_string = eval(fin_string)
+        if str(result_string)[-2:] == '.0':
+            result_string = int(result_string)
         self.outputLabel_1.setText(str(result_string))
         self.fin_nums = [str(result_string)]
         self.temp_nums = []
